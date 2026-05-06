@@ -18,7 +18,7 @@
 
     .container {
       background: white;
-      width: 420px;
+      width: 500px;
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -73,6 +73,7 @@
       padding: 15px;
       border-radius: 10px;
       white-space: pre-line;
+      line-height: 1.6;
     }
 
     .result h2 {
@@ -100,53 +101,84 @@
     <button onclick="analyzeHabit()">🔍 Phân tích</button>
 
     <div class="result">
-      <h2>📊 Kết quả</h2>
-      <div id="result">Nhập thông tin để xem kết quả.</div>
+      <h2>📊 Kết quả phân tích</h2>
+      <div id="result">
+Nhập thông tin để AI phân tích thói quen học tập của bạn.
+      </div>
     </div>
   </div>
 
   <script>
+
     function analyzeHabit() {
 
       let study = Number(document.getElementById("study").value);
       let phone = Number(document.getElementById("phone").value);
       let sleep = Number(document.getElementById("sleep").value);
 
-      let result = "";
+      let result = "📊 PHÂN TÍCH THÓI QUEN HỌC TẬP\n\n";
 
+      // Phân tích giờ học
       if (study < 2) {
-        result += "📚 Bạn cần tăng thời gian học.\n";
-      }
-      else if (study >= 4) {
-        result += "✅ Thời gian học của bạn khá tốt.\n";
+        result += "📚 Bạn học khá ít trong ngày. Điều này có thể làm giảm hiệu quả học tập và khó ghi nhớ kiến thức.\n";
+        result += "👉 Lời khuyên: Hãy tăng thời gian học lên khoảng 3–4 giờ mỗi ngày và chia nhỏ thời gian học theo phương pháp Pomodoro.\n\n";
       }
 
+      else if (study >= 2 && study < 4) {
+        result += "📖 Thời gian học của bạn ở mức trung bình.\n";
+        result += "👉 Lời khuyên: Cố gắng duy trì lịch học đều đặn để cải thiện kết quả học tập.\n\n";
+      }
+
+      else {
+        result += "✅ Bạn có thời gian học khá tốt.\n";
+        result += "👉 Hãy tiếp tục duy trì thói quen học tập này.\n\n";
+      }
+
+      // Phân tích điện thoại
       if (phone > 4) {
-        result += "📱 Bạn nên giảm thời gian sử dụng điện thoại.\n";
-      }
-      else if (phone <= 2) {
-        result += "👍 Bạn kiểm soát điện thoại khá tốt.\n";
+        result += "📱 Bạn sử dụng điện thoại khá nhiều. Điều này dễ gây mất tập trung khi học.\n";
+        result += "👉 Lời khuyên: Giảm thời gian dùng điện thoại, tắt thông báo khi học và hạn chế mạng xã hội.\n\n";
       }
 
-      if (sleep < 6) {
-        result += "😴 Bạn nên ngủ đủ giấc.\n";
+      else if (phone >= 2 && phone <= 4) {
+        result += "📱 Thời gian sử dụng điện thoại của bạn tương đối ổn.\n";
+        result += "👉 Hãy cân bằng giữa giải trí và học tập.\n\n";
       }
+
+      else {
+        result += "👍 Bạn kiểm soát điện thoại khá tốt.\n";
+        result += "👉 Đây là thói quen tích cực giúp tăng khả năng tập trung.\n\n";
+      }
+
+      // Phân tích giấc ngủ
+      if (sleep < 6) {
+        result += "😴 Bạn ngủ chưa đủ giấc.\n";
+        result += "👉 Lời khuyên: Nên ngủ từ 7–8 tiếng mỗi ngày để đảm bảo sức khỏe và khả năng ghi nhớ.\n\n";
+      }
+
       else {
         result += "🌙 Thời gian ngủ của bạn hợp lý.\n";
+        result += "👉 Giấc ngủ tốt sẽ giúp học tập hiệu quả hơn.\n\n";
       }
 
+      // Đánh giá tổng quát
+      result += "🔎 ĐÁNH GIÁ TỔNG QUÁT:\n";
+
       if (study >= 4 && phone <= 2 && sleep >= 7) {
-        result += "\n🎉 Thói quen học tập của bạn rất tốt!";
+        result += "🎉 Bạn có thói quen học tập rất tốt và cân bằng.";
       }
+
       else if (study >= 2 && phone <= 4) {
-        result += "\n🙂 Thói quen học tập của bạn tương đối ổn.";
+        result += "🙂 Thói quen học tập của bạn tương đối ổn nhưng vẫn có thể cải thiện thêm.";
       }
+
       else {
-        result += "\n⚠️ Bạn cần cải thiện thói quen học tập.";
+        result += "⚠️ Bạn cần cải thiện việc quản lý thời gian học và sử dụng điện thoại.";
       }
 
       document.getElementById("result").innerText = result;
     }
+
   </script>
 
 </body>
